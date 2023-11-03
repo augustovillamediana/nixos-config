@@ -1,6 +1,7 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# Archivo de configuración
+# Aquí se define que se va a instalar en el sistema
+# La ayuda se puede encontrar corriendo ‘nixos-help’.
+lp
 
 { config, pkgs, ... }:
 
