@@ -1,49 +1,39 @@
 # Archivo de configuración
 # Aquí se define que se va a instalar en el sistema
 # La ayuda se puede encontrar corriendo ‘nixos-help’.
-lp
 
 { config, pkgs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ # Se incluye los resultados del escaneo de hardware
       ./hardware-configuration.nix
     ];
 
-  ## Nvidia Drivers
-  # Enable OpenGL
+  ## Seccion de los Drivers Nvidia
+  # OpenGL
   hardware.opengl = {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
   };
 
-  # Load nvidia driver for Xorg and Wayland
+  # Cargar los drivers para Xorg y Wayland
   services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
 
-    # Modesetting is required.
+    # Se requiere Modesetting.
     modesetting.enable = true;
 
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    powerManagement.enable = false;
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
-
-    # Use the NVidia open source kernel module (not to be confused with the
-    # independent third-party "nouveau" open source driver).
-    # Support is limited to the Turing and later architectures. Full list of
-    # supported GPUs is at:
-    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
-    # Only available from driver 515.43.04+
-    # Do not disable this unless your GPU is unsupported or if you have a good reason to.
+  # Utiliza el módulo del núcleo de código abierto de NVidia (No confundir con el controlador de código abierto de terceros "nouveau").
+  # El soporte está limitado a las arquitecturas Turing y posteriores. La lista completa de GPUs compatibles se encuentra en:
+  # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
+  # Solo está disponible a partir del controlador 515.43.04 o posterior.
+  # No lo deshabilites a menos que tu GPU no sea compatible o tengas una buena razón para hacerlo."
     open = false;
 
-    # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
+    # Activa el menu de opciones de nvidia, se accede corriendo: `nvidia-settings`.
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
@@ -140,23 +130,23 @@ lp
       neofetch
       vim
 
-      # Graphics
+      # Multimedia
       gimp
       krita
       vlc
       libsForQt5.kdenlive
       obs-studio
 
-      # Development
+      # Desarrollo
       git
       vscodium
       hugo
 
-      # Games
+      # juegos
       steam
 
 
-      #Other
+      # Otros
       wineWowPackages.stable
       winetricks
 
