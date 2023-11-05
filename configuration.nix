@@ -215,10 +215,12 @@
         };
   hardware.opentabletdriver.enable = true;
 
+  # Esta seccion es para cargar los discos extras de linux y windows, la primera seccion es la de windows:
+
   fileSystems."windows" = {
-  device = "/dev/sdc2";  # Replace with the actual device path of your NTFS drive
-  fsType = "ntfs-3g";   # Use "ntfs-3g" for NTFS filesystems
-  mountPoint = "/home/gus/windows";  # Choose a suitable mount point
+  device = "/dev/sdc2";  # Este depende de cual sea el sitio en el que este, no por el ID del disco
+  fsType = "ntfs-3g";   # Se requiere "ntfs-3g" para cargar el sistema de archivos NTFS
+  mountPoint = "/home/gus/windows";  # El punto en el que se carga el disco
   };
 
 
