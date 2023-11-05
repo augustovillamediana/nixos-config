@@ -8,6 +8,7 @@
   imports =
     [ # Se incluye los resultados del escaneo de hardware
       ./hardware-configuration.nix
+      <home-manager/nixos>
     ];
 
   ## Seccion de los Drivers Nvidia
@@ -28,7 +29,7 @@
 
   # Utiliza el módulo del núcleo de código abierto de NVidia (No confundir con el controlador de código abierto de terceros "nouveau").
   # El soporte está limitado a las arquitecturas Turing y posteriores. La lista completa de GPUs compatibles se encuentra en:
-  # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
   # Solo está disponible a partir del controlador 515.43.04 o posterior.
   # No lo deshabilites a menos que tu GPU no sea compatible o tengas una buena razón para hacerlo."
     open = false;
@@ -38,7 +39,7 @@
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
+  };  
   ## End of Nvidia Drivers
 
   # Bootloader.
@@ -142,10 +143,10 @@
       vscodium
       hugo
 
-      # juegos
+      # Juegos
       steam
 
-
+      
       # Otros
       wineWowPackages.stable
       winetricks
@@ -157,7 +158,7 @@
   };
 
 
-
+  
 
   # Enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
@@ -224,4 +225,24 @@
   };
 
 
+home-manager.users.gus = { pkgs, ... }: {
+  home.packages = [ pkgs.atool pkgs.httpie ];
+
+programs.git = {
+    enable = true;
+    extraConfig = {
+      credential.helper = "${
+          pkgs.git.override { withLibsecret = true; }
+        }/bin/git-credential-libsecret";
+    };
+  };
+
+
+  # The state version is required and should stay at the version you
+  # originally installed.
+  home.stateVersion = "23.05";
+};
+
+ 
 }
+
